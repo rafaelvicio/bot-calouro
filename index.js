@@ -20,5 +20,11 @@ const sendRepeat = ( msg, match ) =>
     .then( logSuccessEcho( msg, match ) )
     .catch( logErrorEcho( `Error: ` ) )
 
+const sendBomDia = ( msg, match ) =>
+  bot.sendMessage( msg.chat.id, 'Olá, ' + msg.chat.first_name + ' Bom dia!')
+    .then( logSuccessEcho( msg, match ) )
+    .catch( logErrorEcho( `Error: ` ) )
+
 bot.onText( /\/hello (.*)/, sendHello)
 bot.onText( /\/repeat (.*)/, sendRepeat)
+bot.onText( /bom dia (.*)/, sendBomDia)

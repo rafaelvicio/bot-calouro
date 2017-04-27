@@ -10,6 +10,16 @@ const logErrorEcho = ( msg ) => ( err ) =>
 const logSuccessEcho = ( msg, match ) => ( data ) =>
   console.log( `Success: `, data )
 
+const sendStart = ( msg, match ) =>
+  bot.sendMessage( msg.chat.id, 'Olá, ' + msg.chat.first_name + ' eu sou o Bot Calouro, digite /help para conhecer o que eu posso fazer por voce! ;)')
+    .then( logSuccessEcho( msg, match ) )
+    .catch( logErrorEcho( `Error: ` ) )
+
+const sendHelp = ( msg, match ) =>
+  bot.sendMessage( msg.chat.id, 'Olá, os comandos que eu sei são os seguintes: /start, /repeat')
+    .then( logSuccessEcho( msg, match ) )
+    .catch( logErrorEcho( `Error: ` ) )
+
 const sendHello = ( msg, match ) =>
   bot.sendMessage( msg.chat.id,  msg.chat.first_name)
       .then( logSuccessEcho( msg, match ) )
@@ -24,6 +34,10 @@ const sendBomDia = ( msg, match ) =>
   bot.sendMessage( msg.chat.id, 'Olá, ' + msg.chat.first_name + ' Bom dia!')
     .then( logSuccessEcho( msg, match ) )
     .catch( logErrorEcho( `Error: ` ) )
+
+
+bot.onText( /\/start (.*)/, sendStart)
+bot.onText( /\/help (.*)/, sendHelp)
 
 bot.onText( /\/hello (.*)/, sendHello)
 bot.onText( /\/repeat (.*)/, sendRepeat)

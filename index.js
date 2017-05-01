@@ -40,11 +40,18 @@ const sendRisada = ( msg, match ) =>
     .then( logSuccessEcho( msg, match ) )
     .catch( logErrorEcho( `Error: ` ) )
 
+const sendVoice = ( msg, match ) =>
+  bot.sendMessage( msg.chat.id, 'Desculpe, eu ainda não sei ouvir audio.')
+    .then( logSuccessEcho( msg, match ) )
+    .catch( logErrorEcho( `Error: ` ) )
 
-bot.onText( /\/start (.*)/, sendStart)
-bot.onText( /\/help (.*)/, sendHelp)
+
+bot.onText( /\/start(.*)/, sendStart)
+bot.onText( /\/help(.*)/, sendHelp)
 
 bot.onText( /\/hello (.*)/, sendHello)
 bot.onText( /\/repeat (.*)/, sendRepeat)
 bot.onText(/b(oa|om) (dia|tarde|noite)/i, sendBomDia)
 bot.onText(/lol|kkkk|huehue|h+a+h+a+|h+e+h+e+|h+i+h+i+|h+u+a+s+|j+e+j+e+|h+u+a+h+u+a|h+u+e+h+u+e/i, sendRisada)
+
+bot.on('voice', sendVoice)
